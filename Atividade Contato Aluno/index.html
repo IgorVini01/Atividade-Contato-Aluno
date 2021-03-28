@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="AppDaw">
+    <head>
+
+        <link rel="stylesheet" href="css/index.css">
+        <meta charset="UTF-8">
+        <title>Página com AngularJS</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+        <script type="text/javascript"> 
+
+            var app = angular.module("AppDaw", []); 
+            
+            let adicionarAluno = function($scope) {
+                $scope.nome = "";
+                $scope.email = "";
+                $scope.telefone = "";
+                $scope.alunos = [];
+
+                $scope.adicionar = function() {
+                    console.log("Adicionando um aluno");
+                    let aluno = {
+                        "nome": $scope.nome,
+                        "email": $scope.email,
+                        "telefone": $scope.telefone
+                    }
+                    $scope.alunos.push(aluno);
+                    console.log($scope.alunos);
+                }
+            }
+            
+            app.controller("adicionarAlunoController", adicionarAluno);
+
+        </script>
+
+    </head>
+    
+    <body>
+
+        <h1 class="">Cadastro</h1>
+
+        <div ng-controller="adicionarAlunoController as addAlunoCtrl">
+            <form>
+                <label for="">Nome:</label>
+                <input type="text" ng-model="nome"><br>
+    
+                <label for="">E-mail:</label>
+                <input type="email" ng-model="email"><br>
+    
+                <label for="">Telefone:</label>
+                <input type="text" ng-model="telefone"><br>
+
+                <button type="button" name="cadastrar" ng-click="adicionar()">Cadastrar</button>
+            </form>
+
+            <h2>Informações</h2>
+
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                </tr>
+                <tr ng-repeat="aluno in alunos">
+                    <td> {{aluno.nome}} </td>
+                    <td> {{aluno.email}} </td>
+                    <td> {{aluno.telefone}} </td>
+                </tr>
+            </table>
+    
+        </div>
+
+    </body>
+</html>
